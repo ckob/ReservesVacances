@@ -16,6 +16,8 @@ package KochCarles;/*
  */
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 public class ReservationPeriod {
 
@@ -30,6 +32,14 @@ public class ReservationPeriod {
 		this.price=price;
 		this.available=available;
 	}
+
+    public ReservationPeriod(String start, String end, Double price, Boolean available) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+        this.start=formatter.parseDateTime(start);
+        this.end=formatter.parseDateTime(end);
+        this.price=price;
+        this.available=available;
+    }
 
 	/**
 	 * @return the start

@@ -38,4 +38,7 @@ public interface Bookable {
 	 */
 	Double book(DateTime start, DateTime end);
 
+    Double book(String start, String end);
+
+    String toString();
 }

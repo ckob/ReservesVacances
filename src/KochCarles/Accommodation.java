@@ -11,6 +11,8 @@ package KochCarles;/*
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -109,5 +111,10 @@ public abstract class Accommodation implements BookableHousing {
         }
         System.err.println("Ningun "+this.getClass().getSimpleName()+" disponible para estas fechas.");
         return null;
+    }
+
+    public Double book(String start, String end) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+        return book(formatter.parseDateTime(start), formatter.parseDateTime(end));
     }
 }

@@ -9,6 +9,8 @@ package KochCarles;/*
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 
@@ -45,5 +47,10 @@ public class Car implements Bookable {
             }
         }
         return null;
+    }
+
+    public Double book(String start, String end) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+        return book(formatter.parseDateTime(start), formatter.parseDateTime(end));
     }
 }

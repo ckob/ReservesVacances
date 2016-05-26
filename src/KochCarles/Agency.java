@@ -26,4 +26,13 @@ public class Agency {
 		}
 		return true;
 	}
+
+    @Override
+    public String toString() {
+        String s="";
+        for (Bookable bookableItem : bookableItems) {
+            s+=bookableItem.toString();
+        }
+        return "Agencia:\n"+(s!=""?s:"Res a l'agencia");
+    }
 }

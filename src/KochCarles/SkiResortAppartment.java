@@ -9,11 +9,9 @@ package KochCarles;/*
 
 public class SkiResortAppartment extends MountainAppartment {
 
-	double minCostPerDay=30.;
-
 	public SkiResortAppartment(double cleaningCosts, short maxAllowedPeople, boolean petsAllowed, ReservationPeriod... rps) {
 		super(cleaningCosts, maxAllowedPeople, petsAllowed);
-        MIN_COST_DAY=30;
+        this.MIN_COST_DAY=super.MIN_COST_DAY+30;
         addReservationsPeriods(rps);
 	}
 }
