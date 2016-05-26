@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 
 public interface Bookable {
-	
+
 	/**
 	 * 
 	 * getter of available periods
@@ -40,5 +40,4 @@ public interface Bookable {
 
     Double book(String start, String end);
 
-    String toString();
 }

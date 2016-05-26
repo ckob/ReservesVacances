@@ -8,10 +8,15 @@ package KochCarles;/*
  */
 
 public abstract class Appartment extends Accommodation {
-    double MIN_COST_DAY=-1;
+    double MIN_COST_DAY=0;
 
     public Appartment(double cleaningCosts, short maxAllowedPeople, boolean petsAllowed) {
         super(cleaningCosts, maxAllowedPeople, petsAllowed);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+ ", MIN_COST_DAY="+MIN_COST_DAY+"\n";
     }
 
     @Override

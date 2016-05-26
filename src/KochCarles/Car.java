@@ -15,18 +15,29 @@ import org.joda.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Car implements Bookable {
+    double MIN_COST_DAY=15;
+    int id;
 
 	ArrayList<ReservationPeriod> reservationPeriods;
 	public Car(ReservationPeriod... rps) {
 		reservationPeriods = new ArrayList<>();
-		for (ReservationPeriod rp : rps) {
-			addReservationPeriod(rp);
-		}
+        addReservationsPeriods(rps);
+        id=Accommodation.lastID++;
 	}
 
-	public boolean addReservationPeriod(ReservationPeriod r) {
+	private boolean addReservationPeriod(ReservationPeriod r) {
 		return reservationPeriods.add(r);
 	}
+
+    private void addReservationsPeriods(ReservationPeriod... rps) {
+        for (ReservationPeriod rp : rps) {
+            if (rp.price<MIN_COST_DAY) {
+                System.err.println("El preu per dia no arriba al mínim així que s'ha actualitzat a "+MIN_COST_DAY);
+                rp.price = MIN_COST_DAY;
+            }
+            addReservationPeriod(rp);
+        }
+    }
 
     @Override
     public ArrayList<ReservationPeriod> getAvailablePeriods() {
@@ -42,7 +53,7 @@ public class Car implements Bookable {
         ArrayList<ReservationPeriod> rps = getAvailablePeriods();
         for (ReservationPeriod rp : rps) {
             if (rp.getStart().isBefore(start) && rp.getEnd().isAfter(end)) {
-                rp.available = false;
+                rp.available =false;
                 return new Period(start, end).getDays()*rp.price;
             }
         }
@@ -52,5 +63,18 @@ public class Car implements Bookable {
     public Double book(String start, String end) {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
         return book(formatter.parseDateTime(start), formatter.parseDateTime(end));
+    }
+
+    @Override
+    public String toString() {
+        String rPs="";
+        for (ReservationPeriod reservationPeriod : reservationPeriods) {
+            rPs+=reservationPeriod.toString()+"\n";
+        }
+        return "Car{" +
+                ", id=" + id +
+                ", \nreservationPeriods{\n" + (rPs.isEmpty()?"No hi ha ningun periode de reserva disponible":rPs)+"}"+
+                ", MIN_COST_DAY=" + MIN_COST_DAY;
+
     }
 }

@@ -36,4 +36,6 @@ public interface BookableHousing extends Bookable {
 	 */
 	boolean petsAllowed();
 
+
+
 }
