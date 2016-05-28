@@ -104,7 +104,7 @@ public abstract class Accommodation implements BookableHousing {
     public Double book(DateTime start, DateTime end) {
         ArrayList<ReservationPeriod> rps = getAvailablePeriods();
         for (ReservationPeriod rp : rps) {
-            if (rp.getStart().isBefore(start) && rp.getEnd().isAfter(end)) {
+            if ((rp.getStart().isBefore(start)||rp.getStart().equals(start)) && (rp.getEnd().isAfter(end)||rp.getEnd().equals(end))) {
                 rp.available = false;
                 return new Period(start, end).getDays()*rp.price+cleaningCosts;
             }
