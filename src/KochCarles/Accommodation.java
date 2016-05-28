@@ -10,6 +10,7 @@ package KochCarles;/*
 // allotjament
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.Period;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -105,8 +106,19 @@ public abstract class Accommodation implements BookableHousing {
         ArrayList<ReservationPeriod> rps = getAvailablePeriods();
         for (ReservationPeriod rp : rps) {
             if ((rp.getStart().isBefore(start)||rp.getStart().equals(start)) && (rp.getEnd().isAfter(end)||rp.getEnd().equals(end))) {
-                rp.available = false;
-                return new Period(start, end).getDays()*rp.price+cleaningCosts;
+
+                if (Days.daysBetween(rp.getStart(), start).getDays()>0) { // Si hi ha un dia o mes
+                    // entre el start inicial del ReservationPeriod i el d'ara, creem un nou ReservationPeriod
+                    reservationPeriods.add(new ReservationPeriod(rp.getStart(), start.minusDays(1), rp.price, true));
+                }
+                if (Days.daysBetween(end, rp.getEnd()).getDays()>0) {
+                    reservationPeriods.add(new ReservationPeriod(end.plusDays(1), rp.getEnd(), rp.price, true));
+                }
+                rp.available =false;
+                rp.setStart(start);
+                rp.setEnd(end);
+
+                return Days.daysBetween(start, end).getDays()*rp.price;
             }
         }
         System.err.println("Ningun "+this.getClass().getSimpleName()+" disponible para estas fechas.");
