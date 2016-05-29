@@ -28,7 +28,7 @@ public interface BookableHousing extends Bookable {
 	 * 
 	 * @return	the number of people
 	 */
-	short getMaxAllowedPeople();
+	short	getMaxAllowedPeople();
 	
 	/**
 	 * 

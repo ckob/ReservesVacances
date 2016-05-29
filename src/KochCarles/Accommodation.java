@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public abstract class Accommodation implements BookableHousing {
-    static int lastID=1;
     int id;
 	double cleaningCosts;
 	short maxAllowedPeople;
@@ -42,7 +41,7 @@ public abstract class Accommodation implements BookableHousing {
     }
 
     public Accommodation(double cleaningCosts, short maxAllowedPeople, boolean petsAllowed) {
-		this.id=lastID++;
+		this.id=Agency.lastID++;
         this.cleaningCosts=cleaningCosts;
 		this.maxAllowedPeople=maxAllowedPeople;
 		this.petsAllowed=petsAllowed;

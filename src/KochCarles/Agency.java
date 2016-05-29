@@ -11,8 +11,9 @@ import java.util.ArrayList;
 public class Agency {
 
 	ArrayList<Bookable> bookableItems=new ArrayList<Bookable>();
-	
+	static int lastID;
 	public Agency() {
+		lastID=1;
 	}
 	public boolean addBookable (Bookable b) {
 		return bookableItems.add(b);
@@ -31,7 +32,7 @@ public class Agency {
     public String toString() {
         String s="";
         for (Bookable bookableItem : bookableItems) {
-            s+=bookableItem.toString();
+            s+=bookableItem.toString()+"\n";
         }
         return "Agencia:\n"+(s!=""?s:"Res a l'agencia");
     }

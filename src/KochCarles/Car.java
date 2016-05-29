@@ -24,7 +24,7 @@ public class Car implements Bookable {
 	public Car(ReservationPeriod... rps) {
 		reservationPeriods = new ArrayList<>();
         addReservationsPeriods(rps);
-        id=Accommodation.lastID++;
+        id=Agency.lastID++;
 	}
 
 	private boolean addReservationPeriod(ReservationPeriod r) {
@@ -87,9 +87,8 @@ public class Car implements Bookable {
         for (ReservationPeriod reservationPeriod : reservationPeriods) {
             rPs+=reservationPeriod.toString()+"\n";
         }
-        return "Car{" +
-                ", id=" + id +
+        return  "id=" + id +
                 ", \nreservationPeriods{\n" + (rPs.isEmpty()?"No hi ha ningun periode de reserva disponible":rPs)+"}"+
-                ", MIN_COST_DAY=" + MIN_COST_DAY;
+                ", MIN_COST_DAY=" + MIN_COST_DAY+"\n";
     }
 }
